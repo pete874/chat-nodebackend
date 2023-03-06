@@ -11,12 +11,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(cors({
-  origin: '*',
-  methods: ["GET", "POST"]
-}));
-app.use(router);
 
+app.use(router);
+app.use(cors({
+  origin: "*",
+  methods: ["PUT", "GET", "POST", "DELETE", "OPTIONS"],
+  allowedHeaders: "*",
+  credentials: true
+}));
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
