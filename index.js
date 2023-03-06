@@ -12,7 +12,8 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 app.use(cors({
-  origin: 'https://www.section.io'
+  origin: '*',
+  methods: ["GET", "POST"]
 }));
 app.use(router);
 
