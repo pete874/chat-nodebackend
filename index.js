@@ -1,12 +1,7 @@
 const http = require('http');
 const express = require('express');
+const socketio = require('socket.io');
 const cors = require('cors');
-const socketio = require("socket.io")(httpServer, {
-  cors: {
-    origin: "https://realtimechat-i264.onrender.com",
-    methods: ["GET", "POST"]
-  }
-});
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
@@ -16,9 +11,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://www.section.io'
+}));
 app.use(router);
-
 
 
 io.on('connect', (socket) => {
